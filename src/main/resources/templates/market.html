@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Marketplace</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>Marketplace <div class="order"><a href="/order">Order</a></div></header>
+
+    <div class="mainbox">
+        <h1>Books</h1>
+        <div class="book-list">
+            <div th:each="book : ${books}" class="book" th:if="${book != null}">
+                <h3 th:text="${book.name}"></h3>
+                <p1 th:text="${book.author.name}"></p1><br>
+                <p1></p1>Price: <span th:text="${book.price}"></span><br>
+                <p1>Count: <span th:text="${book.number}"></span></p1><br>
+                <form method="post" action="/addToOrder">
+                    <input type="hidden" name="type" value="Book">
+                    <input type="hidden" name="name" th:value="${book.name}">
+                    <input class="subinput" type="submit" value="Buy">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="mainbox">
+        <h1>Washing machines</h1>
+        <div class="book-list">
+            <div th:each="machine : ${machines}" class="book" th:if="${machine != null}">
+                <h3 th:text="${machine.name}"></h3>
+                <p1></p1>Performance: <span th:text="${machine.performance}"></span><br>
+                <p1></p1>Tank size: <span th:text="${machine.tankSize}"></span><br>
+                <p1>Price: <span th:text="${machine.price}"></span></p1><br>
+                <p1>Count: <span th:text="${machine.number}"></span></p1><br>
+                <form method="post" action="/addToOrder">
+                    <input type="hidden" name="type" value="Plumbing">
+                    <input type="hidden" name="name" th:value="${machine.name}">
+                    <input class="subinput" type="submit" value="Buy">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="mainbox">
+        <h1>Telephones</h1>
+        <div class="book-list">
+            <div th:each="telephone : ${telephones}" class="book" th:if="${telephone != null}">
+                <h3 th:text="${telephone.name}"></h3>
+                <p1></p1>Performance: <span th:text="${telephone.performance}"></span><br>
+                <p1></p1>Tank size: <span th:text="${telephone.accSize}"></span><br>
+                <p1>Price: <span th:text="${telephone.price}"></span></p1><br>
+                <p1>Count: <span th:text="${telephone.number}"></span></p1><br>
+                <form method="post" action="/addToOrder">
+                    <input type="hidden" name="type" value="Electronic">
+                    <input type="hidden" name="name" th:value="${telephone.name}">
+                    <input class="subinput" type="submit" value="Buy">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<!--B1C7DE EBEAE8
+EE7828  202020
+91553D F1DAAE
+-->

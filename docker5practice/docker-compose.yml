@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  db:
+    build: 
+      dockerfile: /db/Dockerfile
+    ports:
+      - 5432:5432
+    networks:
+      - my_network
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: postgres
+
+  app:
+    build: 
+      dockerfile: /java/Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - my_network
+    depends_on:
+      - db
+
+networks:
+  my_network:

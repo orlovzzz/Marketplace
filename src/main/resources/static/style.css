@@ -1,0 +1,63 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: #EE7828;
+}
+
+header {
+    position: relative;
+    text-align: center;
+    font-size: 350%;
+    font-weight: bolder;
+    background: #202020;
+    color: white;
+    padding: 20px;
+    width: 100%;
+}
+
+.mainbox {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 97%;
+    height: auto;
+    background: #202020;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+}
+
+.book-list {
+    display: flex;
+    justify-content: center;
+}
+
+.book {
+    margin: 10px;
+    background: #EE7828;
+    color: #202020;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.order {
+    position: absolute;
+    left : 50px;
+    top: 15px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+#email {
+    position: absolute;
+    display: hidden;
+}

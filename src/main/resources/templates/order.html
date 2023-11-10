@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+    <header>Order <div class="order"><a href="/market">Home</a></div></header>
+
+    <div class="mainbox">
+        <h1>Products</h1>
+        <div class="book-list">
+            <div th:each="product : ${products}" class="book" th:if="${product != null}">
+                <h3 th:text="${product.products.name}"></h3>
+                <p></p>Price: <span th:text="${product.products.price}"></span><br>
+                <p th:text="${product.products.type}"></p><br>
+                <p>Need count: <span th:text="${product.count}"></span></p><br>
+                <form method="post" action="/deleteFromOrder">
+                    <input type="hidden" name="type" th:value="${product.products.type}">
+                    <input type="hidden" name="name" th:value="${product.products.name}">
+                    <input class="subinput" type="submit" value="Delete">
+                </form>
+            </div>
+        </div>
+        <form method="get" action="/doOrder">
+            <input class="subinput" type="submit" value="Buy">
+        </form>
+    </div>
+
+</body>
+</html>
