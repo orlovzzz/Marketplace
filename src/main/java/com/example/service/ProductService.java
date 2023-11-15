@@ -1,12 +1,8 @@
 package com.example.service;
 
 import com.example.entity.*;
-import com.example.repository.BookRepository;
-import com.example.repository.TelephoneRepository;
-import com.example.repository.WashingMachineRepository;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -14,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -26,7 +21,7 @@ public class ProductService {
 //    2 - machine
 
     public List<Products> getProducts(int flag, String urlPart) throws IOException {
-        URL url = new URL("http://localhost:8082/" + urlPart);
+        URL url = new URL("http://localhost:8080/" + urlPart);
         Type listType;
         if (flag == 0) {
             listType = new TypeToken<List<Book>>() {}.getType();
@@ -57,7 +52,7 @@ public class ProductService {
 
 
     public Products getCurrentProduct(int flag, String urlPart) throws IOException {
-        URL url = new URL("http://localhost:8082" + urlPart);
+        URL url = new URL("http://localhost:8080й" + urlPart);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         Products products = null;

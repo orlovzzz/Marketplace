@@ -76,13 +76,7 @@ public class MarketController {
                                @RequestParam String login,
                                @RequestParam String password,
                                @RequestParam String email) {
-        Client client = new Client();
-        client.setLogin(login);
-        client.setPassword(password);
-        client.setSurname(surname);
-        client.setEmail(email);
-        client.setName(name);
-        clientService.addClient(client);
+        Client client = new Client(name, surname, email, login, password);
         return "redirect:/";
     }
 

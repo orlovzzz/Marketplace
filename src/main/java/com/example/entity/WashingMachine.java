@@ -8,8 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "washing_machine")
-public class WashingMachine extends Product implements Products{
+public class WashingMachine implements Products{
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 

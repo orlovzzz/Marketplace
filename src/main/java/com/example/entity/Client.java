@@ -15,6 +15,14 @@ import java.util.List;
 @Table(name = "client")
 public class Client {
 
+    public Client(String name, String surname, String email, String login, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,5 +36,7 @@ public class Client {
     private String login;
 
     private String password;
+
+    private String role;
 
 }

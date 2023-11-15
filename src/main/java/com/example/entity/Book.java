@@ -9,8 +9,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "book")
-public class Book extends Product implements Products{
+public class Book implements Products{
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(hidden = true)
     private int id;

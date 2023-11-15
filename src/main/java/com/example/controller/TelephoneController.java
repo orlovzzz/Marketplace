@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,6 +44,7 @@ public class TelephoneController {
             )
     })
     @GetMapping("")
+    @PreAuthorize("hasAnyRole('USER', 'SELLER')")
     public List<Telephone> getAllTelephones() {
         return telephoneService.getAllTelephones();
     }
@@ -58,6 +60,7 @@ public class TelephoneController {
                     }
             )
     })
+    @PreAuthorize("hasAnyRole('USER', 'SELLER')")
     @Parameter(in = ParameterIn.PATH, name = "id", description = "Telephone ID for searching")
     @GetMapping("/{id}")
     public Telephone getTelephoneById(@PathVariable int id) {
@@ -79,6 +82,7 @@ public class TelephoneController {
     }
     )
     @PostMapping("/add")
+    @PreAuthorize("hasRole('SELLER')")
     public HttpStatus addTelephone(@RequestBody Telephone telephone) {
         telephoneService.addTelephone(telephone);
         return HttpStatus.OK;
@@ -92,6 +96,7 @@ public class TelephoneController {
     })
     @Parameter(in = ParameterIn.PATH, name = "id", description = "Telephone ID to delete")
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('SELLER')")
     public HttpStatus deleteTelephone(@PathVariable int id) {
         telephoneService.deleteTelephone(id);
         return HttpStatus.OK;

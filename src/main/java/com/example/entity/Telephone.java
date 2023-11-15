@@ -8,9 +8,9 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name = "telephone")
-public class Telephone extends Product implements Products{
+public class Telephone implements Products{
 
-//    @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 

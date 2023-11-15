@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class BookController {
             )
     })
     @GetMapping("")
+    @PreAuthorize("hasAnyRole('USER', 'SELLER')")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
@@ -60,6 +62,7 @@ public class BookController {
     })
     @Parameter(name = "id", description = "Book ID for searching")
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('USER', 'SELLER')")
     public Book getBookById(@PathVariable int id)  {
         Book book = bookService.getBookById(id);
         return book;
@@ -75,6 +78,7 @@ public class BookController {
             @Content(mediaType = "application/json", schema = @Schema(implementation = BookDTO.class))
     })
     @PostMapping("/add")
+    @PreAuthorize("hasRole('SELLER')")
     public HttpStatus addBook(@RequestBody Book book) {
         bookService.addBook(book);
         return HttpStatus.CREATED;
@@ -88,6 +92,7 @@ public class BookController {
     })
     @Parameter(in = ParameterIn.PATH, name = "id", description = "Book ID for delete")
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('SELLER')")
     public HttpStatus deleteBook(@PathVariable int id) {
         bookService.deleteBook(id);
         return HttpStatus.OK;

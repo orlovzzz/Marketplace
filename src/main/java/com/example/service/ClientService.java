@@ -3,6 +3,8 @@ package com.example.service;
 import com.example.entity.Client;
 import com.example.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,8 +12,14 @@ import java.util.List;
 @Service
 public class ClientService {
 
+//    @Autowired
+//    private BCryptPasswordEncoder encoder;
+
     @Autowired
     private ClientRepository clientRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<Client> getAllClients() {
         return clientRepository.findAll();
@@ -22,14 +30,15 @@ public class ClientService {
     }
 
     public Client getClientByLogin(String login) {
-        List<Client> client = clientRepository.findByLogin(login);
-        if (!client.isEmpty()) {
-            return client.get(0);
+        Client client = clientRepository.findByLogin(login);
+        if (client == null) {
+            return null;
         }
-        return null;
+        return client;
     }
 
     public void addClient(Client client) {
+        client.setPassword(passwordEncoder.encode(client.getPassword()));
         clientRepository.save(client);
     }
 
@@ -44,7 +53,9 @@ public class ClientService {
             if (client.getSurname() != null) client_f.setSurname(client.getSurname());
             if (client.getEmail() != null) client_f.setEmail(client.getEmail());
             if (client.getLogin() != null) client_f.setLogin(client.getLogin());
-            if (client.getPassword() != null) client_f.setPassword(client.getPassword());
+            if (client.getPassword() != null) {
+                client_f.setPassword(passwordEncoder.encode(client.getPassword()));
+            }
             clientRepository.save(client_f);
         }
     }

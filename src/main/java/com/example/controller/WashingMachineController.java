@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.List;
 @RestController
 @Getter
 @RequestMapping("/wash")
+@PreAuthorize("hasRole('ADMIN')")
 public class WashingMachineController {
 
     @Autowired
@@ -43,6 +45,7 @@ public class WashingMachineController {
             )
     })
     @GetMapping("")
+    @PreAuthorize("hasAnyAuthority('USER', 'SELLER')")
     public List<WashingMachine> getAllWashingMachines() {
         return washingMachineService.getAllWashingMachines();
     }
